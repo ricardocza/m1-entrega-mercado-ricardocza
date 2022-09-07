@@ -88,3 +88,14 @@ const products = [
     imageDescription: "",
   },
 ];
+
+let frutas = []
+let bebidas = []
+let higiene = []
+
+function separarItens(arr) {
+  frutas = arr.filter(item => item.category == "Frutas")
+  bebidas = arr.filter(item => item.category == "Bebidas")
+  higiene = arr.filter(item => item.category == "Higiene")
+}
+
