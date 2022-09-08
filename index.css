@@ -35,11 +35,14 @@ nav img {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  padding: 48px 0;
+  padding: 48px 0 0;
 }
 
 .products-section:nth-child(1){
     padding-top: 100px;
+}
+.products-section:nth-last-child(1){
+    padding-bottom: 100px;
 }
 
 .products-content ul{

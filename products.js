@@ -91,14 +91,18 @@ const products = [
 const main = document.querySelector('.container')
 
 let tipoItens = []
+verificarTipos(products)
+criarSecao(tipoItens)
 
+//Função para selecionar itens presentes no array de produtos
 function verificarTipos(arrObj) {
   for(let i in arrObj) {
     tipoAtual = arrObj[i].category
-    if()
+    if(!tipoItens.some(item => item == tipoAtual)) tipoItens.push(tipoAtual)
   }
 }
 
+//Criar seção de itens
 function criarSecao(arrNomeSecao) {
   for(let i in arrNomeSecao) {
     let secaoAtual = arrNomeSecao[i]    
@@ -117,17 +121,17 @@ function criarSecao(arrNomeSecao) {
     divSecao.appendChild(ulSecao)
 
     secao.append(tituloSecao, divSecao)
-    console.log(ulSecao.id)
+    
     main.append(secao)
     criarCards(ulSecao.id)
   }
 
 }
 
-function criarCards(secaoAtual) {
-  
+//Cria cards de cada item
+function criarCards(secaoAtual) {  
   const ulAtual = document.getElementById(secaoAtual)
-  console.log(ulAtual.id)
+  
   for(let i in products) {
     let produtoAtual = products[i]
     if(produtoAtual.category.toLocaleLowerCase() == ulAtual.id) {
@@ -165,6 +169,7 @@ function criarCards(secaoAtual) {
   
 }
 
+//Converte os pontos dos números em virgulas
 function converterPontoEmVirgula(preco) {
   let converterPreco = String(preco)
   converterPreco = converterPreco.replace('.', ',')
