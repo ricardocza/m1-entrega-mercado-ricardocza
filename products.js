@@ -88,14 +88,87 @@ const products = [
     imageDescription: "",
   },
 ];
+const main = document.querySelector('.container')
 
-let frutas = []
-let bebidas = []
-let higiene = []
+let tipoItens = []
 
-function separarItens(arr) {
-  frutas = arr.filter(item => item.category == "Frutas")
-  bebidas = arr.filter(item => item.category == "Bebidas")
-  higiene = arr.filter(item => item.category == "Higiene")
+function verificarTipos(arrObj) {
+  for(let i in arrObj) {
+    tipoAtual = arrObj[i].category
+    if()
+  }
 }
 
+function criarSecao(arrNomeSecao) {
+  for(let i in arrNomeSecao) {
+    let secaoAtual = arrNomeSecao[i]    
+    
+    const secao = document.createElement('section')
+    secao.classList = 'products-section'
+    
+    const tituloSecao = document.createElement('h1')
+    tituloSecao.innerText = secaoAtual
+
+    const divSecao = document.createElement('div')
+    divSecao.classList = `products-content ${secaoAtual.toLowerCase()}`
+
+    const ulSecao = document.createElement('ul')   
+    ulSecao.id = secaoAtual.toLowerCase()    
+    divSecao.appendChild(ulSecao)
+
+    secao.append(tituloSecao, divSecao)
+    console.log(ulSecao.id)
+    main.append(secao)
+    criarCards(ulSecao.id)
+  }
+
+}
+
+function criarCards(secaoAtual) {
+  
+  const ulAtual = document.getElementById(secaoAtual)
+  console.log(ulAtual.id)
+  for(let i in products) {
+    let produtoAtual = products[i]
+    if(produtoAtual.category.toLocaleLowerCase() == ulAtual.id) {
+
+      const li = document.createElement('li')
+      li.classList = "product"
+  
+      const img = document.createElement('img')
+      if(produtoAtual.image === undefined) img.src = "./img/products/no-img.svg"
+      else img.src = produtoAtual.image
+      img.className = "product-img"
+  
+      const div = document.createElement('div')
+      div.classList = "product-main"
+  
+      const h1 = document.createElement('h1')
+      h1.classList = "product-title"
+      h1.innerText = produtoAtual.title
+      div.appendChild(h1)
+  
+      const h5 = document.createElement('h5')
+      h5.classList = "product-category"
+      h5.innerText = produtoAtual.category
+      div.appendChild(h5)
+  
+      const strong = document.createElement('strong')
+      strong.classList = "product-price"
+      strong.innerText = `R$ ${converterPontoEmVirgula(produtoAtual.price)}`
+      div.appendChild(strong)  
+      li.append(img, div)
+      ulAtual.appendChild(li)
+    }
+
+  }  
+  
+}
+
+function converterPontoEmVirgula(preco) {
+  let converterPreco = String(preco)
+  converterPreco = converterPreco.replace('.', ',')
+  let testValor = converterPreco.slice(-2)
+  if(testValor[0] == ',') converterPreco += '0'
+  return converterPreco
+}
